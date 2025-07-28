@@ -1,0 +1,15 @@
+package com.yedam.service;
+//업무(process)
+
+import java.util.List;
+
+import com.yedam.vo.BoardVO;
+
+public interface BoardService {
+	public List<BoardVO> boardList();	//업무단위표기
+	public BoardVO searchBoard(int boardNo);	//조회(조회 + 카운트증가)기능
+	public boolean registerBoard(BoardVO board);	// 등록기능
+	public boolean remove(int boardNo);	// 삭제기능
+		
+	}
+
