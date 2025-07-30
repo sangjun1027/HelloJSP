@@ -9,36 +9,52 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.yedam.common.Control;
 import com.yedam.common.PageDTO;
+import com.yedam.common.SearchDTO;
 import com.yedam.service.BoardService;
 import com.yedam.service.BoardServiceImpl;
 import com.yedam.vo.BoardVO;
+
 
 public class BoardListControl implements Control {
 	 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) 
 		throws ServletException, IOException {
+		
+			// 파라미터 (page & searchCondition & keyword)파라미터가 안넘어오면 
 			String page = req.getParameter("page");
+			String sc = req.getParameter("searchCondition");
+			String kw = req.getParameter("keyword");
+			
 			page = page == null ? "1" : page;
+			
+			// SearchDTO (메소드 전달할 파라미터)
+			SearchDTO search = new SearchDTO();
+			search.setPage(Integer.parseInt(page));
+			search.setSearchCondition(sc);
+			search.setSearchCondition(kw);
+			
+			
+			
 			// WEB-INF/html/register_form.html
 			BoardService svc = new BoardServiceImpl();
-			List<BoardVO> list = svc.boardList(Integer.parseInt(page)); //글목록
+			List<BoardVO> list = svc.boardList(search); //글목록
 			
 			// 페이징
-			int totalCnt = 96;
+			int totalCnt = svc.totalCount(search);
 			PageDTO paging = new PageDTO(Integer.parseInt(page), totalCnt);
 			
 			// JSP(view역할) 페이지에 데이터 전달
 			req.setAttribute("board_list", list);
 			req.setAttribute("paging", paging);
+			req.setAttribute("searchCondition", sc);
+			req.setAttribute("keyword", kw );
 			
 			
 			// 요청 재지정	
 			req.getRequestDispatcher("WEB-INF/html/board_list.jsp")	//
 				.forward(req, resp);
 
-		
-//		System.out.println("글 목록 컨트롤");
-	}
+	}//end of execute
 	
-}
+}// end of class

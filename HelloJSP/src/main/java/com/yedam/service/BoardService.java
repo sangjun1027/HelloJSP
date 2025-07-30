@@ -3,13 +3,14 @@ package com.yedam.service;
 
 import java.util.List;
 
+import com.yedam.common.SearchDTO;
 import com.yedam.vo.BoardVO;
 
 public interface BoardService {
-	public List<BoardVO> boardList(int page);	//업무단위표기
+	public List<BoardVO> boardList(SearchDTO search);	//업무단위표기
 	public BoardVO searchBoard(int boardNo);	//조회(조회 + 카운트증가)기능
 	public boolean registerBoard(BoardVO board);	// 등록기능
 	public boolean remove(int boardNo);	// 삭제기능
-		
+	public int totalCount(SearchDTO search);	//게시글 전체건수
 	}
 

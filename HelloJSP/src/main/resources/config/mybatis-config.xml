@@ -9,6 +9,7 @@
   <!-- data tyoe 별칭 ↓ -->
   <typeAliases>
   	<typeAlias alias="board" type = "com.yedam.vo.BoardVO"/>
+  	<typeAlias alias="search" type = "com.yedam.common.SearchDTO"/>
   </typeAliases>
   
   <environments default="development">
