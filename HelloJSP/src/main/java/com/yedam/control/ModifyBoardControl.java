@@ -23,12 +23,12 @@ public class ModifyBoardControl implements Control {
 		
 		
 		BoardVO param = new BoardVO();
-		param.setBoardNo(Integer.parseInt(bno));
+		param.setBoardNo(Integer.parseInt(bno));	//문자type을 int type으로 변경
 		param.setTitle(title);
 		param.setContent(content);
 		
 		BoardService svc = new BoardServiceImpl();
-		if ( svc.registerBoard(param)) {
+		if ( svc.modifyBoard(param)) {
 			// 목록이동
 			resp.sendRedirect("boardList.do");
 		} else {

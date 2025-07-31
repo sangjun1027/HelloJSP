@@ -55,9 +55,11 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.selectCount(search);
 	}
 	
-	public boolean modifyBoard (BoardVO boardNo) {
-		int r = mapper.modifyBoard(boardNo);
+	public boolean modifyBoard (BoardVO board) {
+		int r = mapper.updateBoard(board);
+		if ( r> 0 ) {
 			sqlSession.commit();
+			return true;	//정상처리
 	}
 		return false;
 	}

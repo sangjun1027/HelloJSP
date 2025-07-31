@@ -24,12 +24,16 @@ public class AddBoardControl implements Control {
 	String title = req.getParameter("title");
 	String writer = req.getParameter("writer");
 	String content = req.getParameter("content");
-	
+	System.out.println(title);
+	System.out.println(writer);
+	System.out.println(content);
 	//
 	BoardVO param = new BoardVO();
 	param.setTitle(title);
 	param.setContent(content);
 	param.setWriter(writer);
+	
+	
 	
 	BoardService svc = new BoardServiceImpl();
 	if ( svc.registerBoard(param)) {

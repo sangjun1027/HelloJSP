@@ -21,7 +21,7 @@ public class BoardControl implements Control{
 		
 		BoardService svc = new BoardServiceImpl();
 		BoardVO board = svc.searchBoard(Integer.parseInt(bno));
-		
+		System.out.println(board);
 		// board_info에 담아서 board.jsp에 전달ㅇ
 		req.setAttribute("board_info", board);
 

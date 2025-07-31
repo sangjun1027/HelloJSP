@@ -12,5 +12,6 @@ public interface BoardService {
 	public boolean registerBoard(BoardVO board);	// 등록기능
 	public boolean remove(int boardNo);	// 삭제기능
 	public int totalCount(SearchDTO search);	//게시글 전체건수
+	public boolean modifyBoard(BoardVO board); 	// <전달 할 파라메타 지정 / 수정
 	}
 

@@ -14,6 +14,7 @@ public interface BoardMapper {
 	public int insertBoard(BoardVO board);	// insert
 	public int deleteBoard(int boardNo);	// delete
 	public int selectCount(SearchDTO search);	// 게시글 전체건수
-	private int modifyBoard(BoardVO boardNo);
+	public int updateBoard(BoardVO board); // update 기능
+	
 	
 }

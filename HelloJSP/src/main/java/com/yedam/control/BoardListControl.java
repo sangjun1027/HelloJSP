@@ -49,6 +49,7 @@ public class BoardListControl implements Control {
 			req.setAttribute("paging", paging);
 			req.setAttribute("searchCondition", sc);
 			req.setAttribute("keyword", kw );
+			req.setAttribute("", paging);
 			
 			
 			// 요청 재지정	

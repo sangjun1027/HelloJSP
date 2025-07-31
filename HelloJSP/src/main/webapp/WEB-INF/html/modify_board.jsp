@@ -9,7 +9,7 @@
     
     <h3>글 수정화면(modify_board.jsp)</h3>
     <form action="modifyBoard.do">
-    <input type ="hidden" value="${board_info.boardNo }" name="bno">
+    <input type ="hidden" value="${board_info.boardNo }" name="bno"> 
     <table class="table">
         <tr>
             <th>글 번호</th>

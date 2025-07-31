@@ -13,9 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.yedam.control.AddBoardControl;
 import com.yedam.control.BoardControl;
 import com.yedam.control.BoardListControl;
+import com.yedam.control.LoginControl;
+import com.yedam.control.LoginFormControl;
+import com.yedam.control.LogoutControl;
 import com.yedam.control.ModifyBoardControl;
 import com.yedam.control.ModifyFormControl;
 import com.yedam.control.RegisterControl;
+import com.yedam.control.SignFormControl;
+import com.yedam.control.SignUpControl;
 // init - service - detroy
 // *.do로 끝나는 것은 아래 sevlet로 실행 ↓
 // *.do -> 실행할 컨트롤을 여기에 다 등록
@@ -39,6 +44,11 @@ public class FrontController extends HttpServlet {		//.do로 해당되는 건 fr
 		map.put("/modifyForm.do", new ModifyFormControl()); //수정화면
 		map.put("/modifyBoard.do", new ModifyBoardControl());	//수정처리
 		// 	  url이 있어야됨 ↑
+		map.put("/signForm.do", new SignFormControl());
+		map.put("/signup.do", new SignUpControl());		//회원가입
+		map.put("/loginForm.do", new LoginFormControl());	//로그인화면
+		map.put("/login.do", new LoginControl());
+		map.put("/logout.do", new LogoutControl());
 	}
 
 	@Override

@@ -8,7 +8,8 @@
 		parameterType="search">
 		select ta.*
 		from (select /* + INDEX(b PK_BOARD) */ rownum rn, b.*
-		from tbl_board b
+		from
+		tbl_board b
 		<where>
 			<if
 				test="searchCondition != null and searchCondition == 'T'.toString">
@@ -20,10 +21,11 @@
 			</if>
 			<if
 				test="searchCondition != null and searchCondition == 'TW'.toString ">
-				writer like '%'||#{keyword}||'%' or title like '%'||#{keyword}||'%'
+				writer like '%'||#{keyword}||'%' or title like
+				'%'||#{keyword}||'%'
 			</if>
 		</where>
-		)ta
+		order by board_no desc )ta
 		where ta.rn > (#{page} - 1) * 5
 		<![CDATA[
 		and     ta.rn <= #{page} * 5
@@ -74,13 +76,19 @@
 			</if>
 			<if
 				test="searchCondition != null and searchCondition == 'TW'.toString ">
-				writer like '%'||#{keyword}||'%' or title like '%'||#{keyword}||'%'
+				writer like '%'||#{keyword}||'%' or title like
+				'%'||#{keyword}||'%'
 			</if>
 		</where>
 	</select>
 
-	<!-- 수정처리 -->
-	<select id="modifyBoard" parameterType="board">
-			update	tbl_board
-	</select>
+
+	<update id="updateBoard" parameterType="board">
+		update 		tbl_board
+		set 	title = #{title},
+				content = #{content}
+		where board_no = #{boardNo}
+	</update>
+
+
 </mapper>
