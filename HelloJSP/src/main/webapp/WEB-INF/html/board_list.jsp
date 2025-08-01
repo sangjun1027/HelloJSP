@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<jsp:include page="includes/Header.jsp" />
+
 
 <!-- <p>${board_list }</p> --> 
 <!--  <p>${paging }</p> -->
@@ -42,7 +42,7 @@
 		<c:forEach var="board" items="${board_list }">
 			<tr>
 				<td><c:out value="${board.boardNo }" /></td>
-				<td><a href='board.do?bno=${board.boardNo }'>${board.title }</td>
+				<td><a href='board.do?bno=${board.boardNo }&page=${paging.currPage}'>${board.title }</a></td>
 				<td><c:out value="${board.writer }" /></td>
 				<td><c:out value="${board.viewCnt }" /></td>
 			</tr>
@@ -92,4 +92,3 @@
 	</ul>
 </nav>
 
-<jsp:include page="includes/Footer.jsp" />

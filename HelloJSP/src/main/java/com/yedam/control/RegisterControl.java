@@ -20,7 +20,7 @@ public class RegisterControl implements Control {
 		// page를 요청하면 html로 
 	// 예외처리
 			// 요청, 재지정 ↓ /  제일 상위 경로가 webapp이기에
-			req.getRequestDispatcher("WEB-INF/html/register_form.jsp")
+			req.getRequestDispatcher("user/register_form.tiles")
 					.forward(req, resp);
 			//              ↑요청, 재지정해주는 객체
 		

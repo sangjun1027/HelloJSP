@@ -4,12 +4,13 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>		<!--  이걸해줘야 호출해서 사용가능 -->
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
     
-<jsp:include page = "includes/Header.jsp" />
    
     
     <h3>글 수정화면(modify_board.jsp)</h3>
     <form action="modifyBoard.do">
     <input type ="hidden" value="${board_info.boardNo }" name="bno"> 
+    <input type ="hidden" value="${page }" name="page">
+    
     <table class="table">
         <tr>
             <th>글 번호</th>
@@ -42,4 +43,3 @@
         </tr>
     </table>
     </form>
-    <jsp:include page = "includes/Footer.jsp" />

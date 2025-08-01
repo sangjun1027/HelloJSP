@@ -28,9 +28,11 @@ public class LoginControl implements Control {
 		if (member == null) {
 			
 		} else {
+			// 세션을 활용하여 정보저장
 			// 정상적으로 id, pw를 입력했다는 의미
 			HttpSession session = req.getSession();	//쿠키정보를 확인해서 session객체를 만들어줌
-			session.setAttribute("logId", id);	// logid라는 속성
+			session.setAttribute("logId", id);	// logid라는 속성 = 로그인아이디
+			session.setAttribute("auth", member.getResponsibility());  // user / 관리자
 			resp.sendRedirect("boardList.do");
 		}
 	}

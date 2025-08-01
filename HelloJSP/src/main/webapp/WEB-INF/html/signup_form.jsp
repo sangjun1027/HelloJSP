@@ -130,13 +130,13 @@ hr {
       <p>Please fill in this form to create an account.</p>
       <hr>
       <label for="id"><b>ID</b></label>
-      <input type="text" placeholder="Enter New ID" name="id" required>
+      <input type="text" placeholder="아이디를 입력하세요" name="id" required>
 
       <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+      <input type="password" placeholder="비밀번호를 입력하세요" name="psw" required>
 
       <label for="name"><b>Name</b></label>
-      <input type="text" placeholder="Enter Name" name="name" required>
+      <input type="text" placeholder="실명을 입력하세요" name="name" required>
       
       <label>
         <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
