@@ -49,6 +49,10 @@ public class FrontController extends HttpServlet {		//.do로 해당되는 건 fr
 		map.put("/loginForm.do", new LoginFormControl());	//로그인화면
 		map.put("/login.do", new LoginControl());		
 		map.put("/logout.do", new LogoutControl());
+		
+		
+		// 기타
+		map.put("/js.do",  new JSControl());	// java script 연습
 	}
 
 	@Override
