@@ -5,8 +5,27 @@
 <mapper namespace="com.yedam.mapper.ReplyMapper">
 
 	<select id="replyList" parameterType="int" resultType="com.yedam.vo.ReplyVO">
-			select *
-			from tbl_reply
-			where board_no = #{boardNo}
+			select b.*
+			from (select /*+ index_desc (r pk_reply) */ r.*, rownum rn
+        			from  tbl_reply r
+        			where  r.board_no = #{boardNo}) b
+			where  b.rn > (#{page} - 1) * 5
+			<![CDATA[
+			and    b.rn <= (#{page} * 5)
+			]]>
 	</select>
+	
+	<delete id="deleteReply" parameterType="int">
+			delete from tbl_reply
+			where reply_no = #{replyNo}
+	</delete>
+	
+	<insert id="insertReply" parameterType="com.yedam.vo.ReplyVO">
+	  <selectKey keyProperty="replyNo" resultType="int" order="BEFORE">	<!--  key값을 조회하는 -->
+	  	select reply_seq.nextVal from dual		<!--  다음 시퀀스값을 계속 가져옴 -->
+	  </selectKey>
+	  
+		insert into tbl_reply (reply_no, board_no, reply, replyer)
+		values (#{replyNo}, #{boardNo}, #{reply}, #{replyer})
+	</insert>
 </mapper>

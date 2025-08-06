@@ -22,8 +22,10 @@ public class ReplyListControl implements Control {
 			// 댓글목록(json)
 		resp.setContentType("text/json;charset=utf-8");
 		String bno = req.getParameter("bno");
+		String page = req.getParameter("page");
+		
 		ReplyService svc = new ReplyServiceImpl();
-		List<ReplyVO> list = svc.replyList(Integer.parseInt(bno));
+		List<ReplyVO> list = svc.replyList(Integer.parseInt(bno), Integer.parseInt(page));
 		
 		
 		// Gson이라는 라이브러리를 활용해서 json 문자열

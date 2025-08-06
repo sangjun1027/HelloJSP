@@ -5,6 +5,9 @@
 
 // 페치함수
 fetch('js/MOCK_DATA.json')	// Promise객체
+// json값을 반환해주는 url ↑
+// data를 가져와거 page에 보여주기위한 용도
+
 	.then(function(result) {
 		 console.log(result);	//응답정보(body)
 		return result.json();	//Promise객체, json -> method

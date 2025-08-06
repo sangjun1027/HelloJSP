@@ -12,7 +12,7 @@ public class Main {
 		SqlSession sqlSession = DBUtil.getInstance().openSession();
 		ReplyMapper mapper =sqlSession.getMapper(ReplyMapper.class);
 		
-		List<ReplyVO> list = mapper.replyList(310);
+		List<ReplyVO> list = mapper.replyList(310, 1);
 		for (ReplyVO reply : list ) {
 			System.out.println(reply);
 		}
