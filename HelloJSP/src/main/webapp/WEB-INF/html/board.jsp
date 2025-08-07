@@ -100,6 +100,12 @@
 	  	  <span class="col-sm-2">삭제</span>
 	  	</li>
 	  	<li><hr /></li>
+	  	<li>
+	  	  <span class="col-sm-2">12</span>
+	  	  <span class="col-sm-5">댓글입니다</span>
+	  	  <span class="col-sm-2">user02</span>
+	  	  <span class="col-sm-2"><button>삭제</button></span>
+	  	 </li>
 	  </ul>
 	</div>
 

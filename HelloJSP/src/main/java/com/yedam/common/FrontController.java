@@ -14,6 +14,8 @@ import com.yedam.control.AddBoardControl;
 import com.yedam.control.AddReplyControl;
 import com.yedam.control.BoardControl;
 import com.yedam.control.BoardListControl;
+import com.yedam.control.ChartControl;
+import com.yedam.control.EventControl;
 import com.yedam.control.LoginControl;
 import com.yedam.control.LoginFormControl;
 import com.yedam.control.LogoutControl;
@@ -24,6 +26,7 @@ import com.yedam.control.RemoveReplyControl;
 import com.yedam.control.ReplyListControl;
 import com.yedam.control.SignFormControl;
 import com.yedam.control.SignUpControl;
+import com.yedam.control.TotalCntControl;
 // init - service - detroy
 // *.do로 끝나는 것은 아래 sevlet로 실행 ↓
 // *.do -> 실행할 컨트롤을 여기에 다 등록
@@ -61,8 +64,13 @@ public class FrontController extends HttpServlet {		//.do로 해당되는 건 fr
 		map.put("/replyList.do", new ReplyListControl()); // 글번로 -> 댓글목록
 		map.put("/removeReply.do", new RemoveReplyControl());	//댓글삭제
 		map.put("/addReply.do", new AddReplyControl());		//댓글등롣
-	}
+		map.put("/totalReply.do", new TotalCntControl());	// 댓글건수계산
 
+		// 기타
+		map.put("/chartData.do", new ChartControl());
+		// fullCalendar 목록
+		map.put("/eventlist.do", new EventControl());
+	}
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException{

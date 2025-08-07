@@ -9,5 +9,6 @@ public interface ReplyService {
 	boolean removeReply(int replyNo);	// 삭제
 	boolean addReply(ReplyVO reply);	// 등록 
 	// ReplyVO라는 인스턴스가 와야됨 ↑
+	int replyCount(int boardNo);	// 댓글건수
 	
 }

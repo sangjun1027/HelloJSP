@@ -22,10 +22,15 @@
 	
 	<insert id="insertReply" parameterType="com.yedam.vo.ReplyVO">
 	  <selectKey keyProperty="replyNo" resultType="int" order="BEFORE">	<!--  key값을 조회하는 -->
-	  	select reply_seq.nextVal from dual		<!--  다음 시퀀스값을 계속 가져옴 -->
+	  		select reply_seq.nextVal from dual		<!--  다음 시퀀스값을 계속 가져옴 -->
 	  </selectKey>
-	  
 		insert into tbl_reply (reply_no, board_no, reply, replyer)
 		values (#{replyNo}, #{boardNo}, #{reply}, #{replyer})
 	</insert>
+	
+	<select id="selectCount" parameterType="int">
+			select  count(1)
+			from tbl_reply
+			where board_no in ${boardNo}
+	</select>
 </mapper>
