@@ -17,7 +17,9 @@ public interface ReplyMapper {
 	// 전체목록가져오는 기능, 일정추가기능, 일정삭제기능 -> mapper.xml에 추가
 	List<EventVO> eventList();	//단순조회는 매개변수가 필요없다
 	int insertEvent(String title,String start, String end);
-	int deleteEvent(String title);
+	int addEvent(EventVO evo);
+	int insertEvent(EventVO event);
+	int deleteEvent(EventVO event);
 	
 
 }

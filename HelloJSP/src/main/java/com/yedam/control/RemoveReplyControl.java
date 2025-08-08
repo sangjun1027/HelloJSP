@@ -13,7 +13,8 @@ import com.yedam.service.ReplyServiceImpl;
 public class RemoveReplyControl implements Control {
 
 	@Override
-	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public void execute(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException {
 		// 댓글번호 -> DB삭제 -> 처리결과 반환
 		String rno = req.getParameter("rno");
 		

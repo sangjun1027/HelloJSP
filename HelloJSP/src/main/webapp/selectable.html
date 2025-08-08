@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset='utf-8' />
-<script src='../dist/index.global.js'></script>
+<script src='../dlist/index.global.js'></script>
 <script>
-
+	
   document.addEventListener('DOMContentLoaded', function() {
-	  let eventList = [		//eventList라는 배열
-		  {title:"test",start:"2023-01-04"}
-	  ];
+	  // function ->함수, 핸들러 역할
+	  // 값을 담을 변수선언
+	  let cal = document.getElementById('calendar')
+	  let eventList = [{		//eventList라는 배열
+		  title:"test",
+		  start:"2023-01-04"
+		}];
 	  
-	  fetch('eventList.do')
+	  // ajax실행, 순서가 중요하다
+	  fetch('eventList.do')	//fetch는 비동기방식이기에 기다려야된다.
+	  // 비동기방식이기에 실행순서를 생각하면서 코딩
 	  	.then(resolve => resolve.json())
 	  	.then(result => {
 	  		console.log(result);
 	  		eventList = result;
 	  		console.log(eventList);
-	  		
-	  	
-	  
-    var calendarEl = document.getElementById('calendar');
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+	var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {	//object type의 객체
+    	// key : value
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
@@ -31,91 +36,62 @@
       navLinks: true, // can click day/week names to navigate views
       selectable: true,
       selectMirror: true,
-      select: function(arg) {
-        var title = prompt('Event 제목');
+      select: function(arg) {	//method
+      // ↑객체안에 소속되어있는 함수
+      console.log(arg);	// arg가 뭔지 보기위한 console
+      // 			↑ title, startStr, endStr가 arg안에 있음을 확인함
+      
+        var title = prompt('일정을 등록하세요');
         if (title) {
-          calendar.addEvent({
-            title: title,
-            start: arg.start,
-            end: arg.end,
-            allDay: arg.allDay
-          })
-        }
+        	fetch('addEvent.do?title=' + title + '&start=' + arg.startStr + '&end=' + arg.endStr)
+        	  .then(resolve => resolve.json())
+        	  .then(result => {
+        			console.log(result);  
+        	 	 if(result.retCode == 'OK'){
+          	calendar.addEvent({	// addEvent라는 method가 
+            	title: title,
+            	start: arg.start,
+            	end: arg.end,
+            	allDay: arg.allDay
+        	  })
+        	  } else if (result.retCode == 'NG'){
+        			alert ('에러가 발생')  
+        	  } else {
+        		  alert ('알 수 없는 예외');
+        	  }
+        	  })
+        	  .catch(err => console.error(err));
+        	
+        	// 캘린더에 일정을 추가	
+        	// 위 fetch밖에 코드를 그려주면 fetch결과에 관계없이 아래가 실행됨
+          }
         calendar.unselect()
       },
-      eventClick: function(arg) {
+      eventClick: function (arg) {	// 삭제할 떄는 eventClick 실행
         if (confirm('Event를 삭제하시겠습니까?')) {
-          arg.event.remove()
+        	fetch('removeEvent.do?title=' + arg.event.title)
+        	  .then(resolve => resolve.json())
+        	  .then(result => {
+        		  if(result.retCode == 'OK')
+          			arg.event.remove()
+          		  else if (result.retCode == 'NG')
+          		 	alert ('삭제실패')
+          		  else
+          			alert ('알 수 없는 에러코드') 
+        	  })
+        	  .catch(err => console.error(err))
         }
       },
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
-      events: [
-        {
-          title: 'All Day Event',
-          start: '2023-01-01'
-        },
-        {
-          title: '새해맞이 Event',
-          start: '2023-01-01',
-          end: '2023-01-06'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2023-01-09T16:00:00'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2023-01-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2023-01-11',
-          end: '2023-01-13'
-        },
-        {
-          title: 'Meeting',
-          start: '2023-01-12T10:30:00',
-          end: '2023-01-12T12:30:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2023-01-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2023-01-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2023-01-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2023-01-12T20:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          start: '2023-01-13T07:00:00'
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2023-01-28'
-        }
-      ]
+      events: eventList
     });
 
-    calendar.render();
-    
-  })
-  
-	.catch(err => console.error(err));
-	  
-  });	  
-
+    calendar.render();	
+	  })
+	
+	  .catch(err => console.error(err));
+  });
 </script>
 <style>
 
